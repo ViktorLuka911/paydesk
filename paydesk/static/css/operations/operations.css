@@ -1,0 +1,53 @@
+body {
+    background-image: url('./../../img/img_4.jpg');
+}
+
+.header_main_list_left {
+    gap: 300px !important;
+}
+
+.form_block {
+    flex-direction: column;
+    gap: 20px;
+}
+
+.titles, .titles_info {
+    flex-direction: column;
+}
+
+.titles_info {
+    width: 30%;
+    gap: 15px;
+}
+
+.titles {
+    width: 30%;
+    gap: 35px;
+}
+
+.error_block {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.header_list_operations {
+    margin: 100px;
+    gap: 200px;
+    align-items: center;
+}
+
+.money_amount, .money_currency {
+    align-items: center;
+    gap: 10px;
+    width: 40%;
+}
+
+.input_table {
+    gap: 15px;
+    align-items: center;
+}
+
+.money_input {
+    align-items: center;
+    gap: 15px;
+}

@@ -1,0 +1,64 @@
+{% extends "main/layout.html" %}
+{% load static %}
+
+{% block title %}
+    Робота з даними рахунку
+{% endblock %}
+
+{% block page_styles %}
+    <link rel="stylesheet" href="{% static 'css/person/add.css' %}">
+{% endblock %}
+
+{% block page_scripts %}
+    <script src="{% static 'js/burger_menu.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+
+    <div class="header_menu flex">
+        <div class="header_menu_container block_container_big flex">
+            <a href="{% url 'person' person_id=person.id %}" class="header_button flex hover_item block_container_big">
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
+            <div class="dropdown">
+                <button class="dropdown_button hover_item header_button block_container_big " onclick="openTable('menu')">
+                    <i class="fa-solid fa-dollar-sign"></i>
+                </button>
+                <div id="menu" class="dropdown_content block_container_big title_style">
+                    <a href="#">USD до UAH: 37.04</a>
+                    <a href="#">EUR до UAH: 40.00</a>
+                    <a href="javascript:void(0)" onclick="closeTable('menu')" class="closebtn flex closebtn_menu">&times;</a>
+                </div>
+            </div>
+            <a href="{% url 'index' %}" class="header_button flex hover_item block_container_big">
+                <i class="fa-solid fa-house"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="page_wide flex">
+        <form method="post">
+            {% csrf_token %}
+            <div class="block_container_big form_block flex">
+                <header class="flex">
+                    <h1 class="info header_style block_container_small">{{ edit|yesno:"Редагувати рахунок,Створити рахунок" }}</h1>
+                </header>
+                <div class="person_table flex">
+                    <div class="titles flex title_style">
+                        <strong>Номер картки</strong>
+                        <strong>ПІН</strong>
+                        <strong>CVV</strong>
+                        <strong>Валюта</strong>
+                    </div>
+                    <div class="titles_info flex title_style">
+                        <div class="block_container_small">{{ form.card_number }}</div>
+                        <div class="block_container_small">{{ form.pin }}</div>
+                        <div class="block_container_small">{{ form.cvv }}</div>
+                        <div class="block_container_small">{{ form.currency }}</div>
+                    </div>
+                </div>
+        
+            <button type="submit" class="hover_item block_container_big title_style">Зберегти</button>
+        </form>
+    </div>
+{% endblock %}

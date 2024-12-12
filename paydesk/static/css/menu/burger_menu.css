@@ -1,0 +1,83 @@
+.sidenav {
+    position: fixed;
+    width: 0;
+    z-index: 1;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.5);
+    overflow-x: hidden;
+    transition: width 0.1s;
+    padding-top: 60px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    top: 0;
+    opacity: 0;
+}
+
+.left h1 {
+    margin-bottom: 200px;
+}
+
+.right h1 {
+    margin-bottom: 100px;
+}
+
+.right {
+    right: 0;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.left {
+    left: 0;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.sidenav a {
+    font-size: 25px;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 10px;
+    font-size: 36px;
+}
+
+.sidenav.left .closebtn {
+    right: 20px;
+    left: auto;
+}
+
+.sidenav.right .closebtn {
+    left: 20px;
+    right: auto;
+}
+
+.sidebar_item, .field_sidebar_item {
+    width: 80%;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sidebar_item {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.field_sidebar_item {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.sidebar_item:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.closebtn:hover {
+    color: rgba(0, 0, 0, 0.3);
+}

@@ -1,0 +1,116 @@
+body {
+    background-image: url('./../../img/img_4.jpg');
+}
+
+.person_info {
+    flex-direction: column;
+    gap: 20px;
+}
+
+.table_info {
+    gap: 10px;
+    justify-content: center;
+}
+
+.titles, .titles_info {
+    flex-direction: column;
+}
+
+.titles {
+    width: 40%;
+    gap: 30px;
+}
+
+.titles_info {
+    width: 50%;
+    gap: 10px;
+}
+
+.info_datas {
+    flex-direction: column;
+}
+
+.info_datas {
+    width: 50%;
+    gap: 10px;
+}
+
+.margin_top_block {
+    margin-top: 30px;
+}
+
+.deposit_block {
+    flex-direction: column;
+    gap: 30px;
+}
+
+.current_deposit_block, .previous_deposits_block {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.deposit_info {
+    gap: 10px;
+}
+
+.current_deposit_table {
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+}
+
+.empty_deposits {
+    width: 100%;
+}
+
+.list_items {
+    gap: 30px;
+}
+
+.prev_deposit {
+    width: 100%;
+    align-items: center;
+}
+
+
+.credit_block {
+    flex-direction: column;
+    gap: 30px;
+}
+
+.current_credit_block, .previous_credits_block {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.credit_info, .deposit_info {
+    gap: 10px;
+    justify-content: center;
+}
+
+.current_credit_table {
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+}
+
+.empty_credits {
+    width: 100%;
+}
+
+.list_items {
+    gap: 30px;
+}
+
+.prev_credit {
+    width: 100%;
+    align-items: center;
+}
+
+.add_credit a, .add_credit {
+    width: 100%;
+}

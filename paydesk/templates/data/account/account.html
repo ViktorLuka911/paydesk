@@ -1,0 +1,228 @@
+{% extends "main/layout.html" %}
+{% load static %}
+
+{% block title %}
+    Рахунок
+{% endblock %}
+
+{% block page_styles %}
+    <link rel="stylesheet" href="{% static 'css/account/account.css' %}">
+    <link rel="stylesheet" href="{% static 'css/menu/burger_menu.css' %}">
+{% endblock %}
+
+{% block page_scripts %}
+    <script src="{% static 'js/burger_menu.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+
+    <div class="header_menu flex">
+        <div class="header_menu_container block_container_big flex">
+            <a href="{% url 'person' person_id=person.id %}" class="header_button flex hover_item block_container_big">
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
+
+            <div class="dropdown">
+                <button class="dropdown_button hover_item header_button block_container_big " onclick="openTable('menu')">
+                    <i class="fa-solid fa-dollar-sign"></i>
+                </button>
+                <div id="menu" class="dropdown_content block_container_big title_style">
+                    <a href="#">USD до UAH: 37.04</a>
+                    <a href="#">EUR до UAH: 40.00</a>
+                    <a href="javascript:void(0)" onclick="closeTable('menu')" class="closebtn flex closebtn_menu">&times;</a>
+                </div>
+            </div>
+
+            <a href="{% url 'index' %}" class="header_button flex hover_item block_container_big">
+                <i class="fa-solid fa-house"></i>
+            </a>
+        </div>
+    </div>
+
+    <div id="sidenavRight" class="sidenav left">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav('sidenavRight')">&times;</a>
+        <h1 class="header_style">Ви дійсно бажаєте видалити рахунок</h1>
+        <a href="{% url 'delete_account' person_id=person.id account_id=account.id %}" class="sidebar_item">Так</a>
+        <a href="javascript:void(0)" class="sidebar_item" onclick="closeNav('sidenavRight')">Ні</a>
+    </div>
+
+    <div id="sidenavLeft" class="sidenav right">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav('sidenavLeft')">&times;</a>
+        <h1 class="header_style">Операції</h1>
+        <a href="{% url 'issuance_cash' account_id=account.id %}" class="sidebar_item">Видача готівки</a>
+        <a href="{% url 'account_replenishment' account_id=account.id %}" class="sidebar_item">Попонення рахунку</a>
+        <a href="{% url 'transfer_funds' account_id=account.id %}" class="sidebar_item">Переказ коштів</a>
+    </div>
+
+    <div class="page">
+        <header class="header_main_list flex">
+            <div class="header_style block_container_big">
+                <h1>Інформація про банківський рахунок особи</h1>
+            </div>
+        </header>
+
+        <div class="person_info flex">
+            <div class="person_table block_container_big">
+                <h1 class="info header_style block_container_small">{{ person.last_name }} {{ person.first_name }}</h1>
+                <div class="table_info margin_top_block flex">
+                    <div class="titles flex title_style">
+                        <strong>ІПН</strong>
+                        <strong>Вік</strong>
+                        <strong>Номер телефону</strong>
+                    </div>
+                    <div class="titles_info flex title_style">
+                        <div class="block_container_small">{{ person.itn }}</div>
+                        <div class="block_container_small">{{ person.age }}</div>
+                        <div class="block_container_small">{{ person.phone_number }}</div>
+                    </div>    
+                    
+                </div>                
+            </div>
+
+            <div class="person_table block_container_big">
+                <h1 class="info header_style block_container_small">Рахунок</h1>
+                <div class="table_info margin_top_block flex">
+                    <div class="titles flex title_style">
+                        <strong>Номер картки</strong>
+                        <strong>ПІН</strong>
+                        <strong>СVV</strong>
+                        <strong>Валюта</strong>
+                        <strong>Баланс</strong>
+                    </div>
+
+                    <div class="titles_info flex title_style">
+                        <div class="block_container_small">{{ account.card_number }}</div>
+                        <div class="block_container_small">{{ account.pin }}</div>
+                        <div class="block_container_small">{{ account.cvv }}</div>
+                        <div class="block_container_small">{{ account.currency }}</div>
+                        <div class="block_container_small">{{ account.amount_money|floatformat:2 }}</div>
+                    </div>
+                </div>   
+            </div>
+        </div>
+
+        <div class="work_user_data margin_top_block flex">
+            <button class="openbtn flex hover_item header_button block_container_big" onclick="openNav('sidenavRight')">
+                <p class="title_style">Видалити рахунок</p>
+            </button>
+        </div>
+
+        <div class="work_user_operation margin_top_block flex">
+            <button class="openbtn flex hover_item header_button block_container_big" onclick="openNav('sidenavLeft')">
+                <p class="title_style">Провести операцію</p>
+            </button> 
+        </div>
+    
+        {% if card_type == "Ощадна" %}
+            <div class="deposit_block margin_top_block flex">
+                <div class=" current_deposit_block flex">
+
+                    <div class="current_deposit_table block_container_big flex">
+                        <h1 class="block_container_small header_style">Депозит</h1>
+                            {% if deposit %}
+                            <div class="deposit_info flex">
+                                <div class="titles flex title_style">
+                                    <strong>Початкова сума депозиту</strong>
+                                    <strong>Процентна ставка</strong>
+                                    <strong>Початок терміну</strong>
+                                    <strong>Кінець терміну</strong>
+                                </div>
+
+                                <div class="titles_info flex title_style">
+                                    <div class="deposit_data block_container_small">{{ deposit.deposit_amount }}</div>
+                                    <div class="deposit_data block_container_small">{{ deposit.interest_rate }}</div>
+                                    <div class="deposit_data block_container_small">{{ deposit.term_start }}</div>
+                                    <div class="deposit_data block_container_small">{{ deposit.term_end }}</div>
+                                </div>
+                            </div>
+                            {% else %}
+                                <h1 class="empty_deposits header_style">Інформація відсутня</h1>
+                            {% endif %}
+                    </div>
+                    
+                </div>
+            </div>
+        {% endif %}
+
+        {% if card_type == "Кредитна" %}
+            <div class="credit_block margin_top_block flex">
+                <div class=" current_credit_block flex">
+
+                    <div class="current_credit_table block_container_big flex">
+                        <h1 class="block_container_small header_style">Кредит</h1>
+                        {% if credit %}
+
+                            <div class="credit_info flex">
+                                <div class="titles flex title_style">
+                                    <strong>Кредитний ліміт</strong>
+                                    <strong>Відсоткова ставка</strong>
+                                    <strong>Поточна заборгованість</strong>
+                                </div>
+    
+                                <div class="titles_info flex title_style">
+                                    <div class="credit_data block_container_small">{{ credit.credit_limit }}</div>
+                                    <div class="credit_data block_container_small">{{ credit.interest_rate }}</div>
+                                    <div class="credit_data block_container_small">{{ credit.current_debt }}</div>
+                                </div>
+                            </div>
+                        {% else %}
+                            <h1 class="empty_credits header_style">Інформація відсутня</h1>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        
+        <div class="list_accounts margin_top_block flex">
+            <h1 class="block_container_big header_style">Операції</h1>
+            <ul class="list_items flex">
+                {% for operation in operations %}
+                    <li class="operation_item block_container_big flex">
+                        <div class="operation_header block_container_small">{{ operation.name }}</div>
+                        <div class="operation_persons flex half_width {% if not operation.sender %}full_width{% endif %} 
+                        {% if not operation.recipient %}full_width{% endif %}">
+
+                            {% if operation.name == 'Переказ коштів' %}
+                                <div class="operation_sender flex">
+                                    <div class="operation_person_title title_style block_container_small">Відправник</div>
+                                    <div class="operation_person title_style">{{ operation.sender.name }}</div>
+                                    <div class="operation_person_type title_style">{{ operation.sender.person_type }}</div>
+                                    <div class="operation_person_cardnumber title_style">{{ operation.sender.card_number }}</div>
+                                    <div class="operation_person_cardnumber title_style">{{ operation.recipient.card_currency }}</div>
+                                </div>
+
+                                <div class="operation_recipient flex">
+                                    <div class="operation_person_title title_style block_container_small">Отримувач</div>
+                                    <div class="operation_person title_style">{{ operation.recipient.name }}</div>
+                                    <div class="operation_person_type title_style">{{ operation.recipient.person_type }}</div>
+                                    <div class="operation_person_cardnumber title_style">{{ operation.recipient.card_number }}</div>
+                                    <div class="operation_person_cardnumber title_style">{{ operation.recipient.card_currency }}</div>
+                                </div>
+                            {% else %}
+                                <div class="operation_sender flex">
+                                    <div class="operation_person_title title_style block_container_small">Рахунок</div>
+                                    <div class="operation_person title_style">{{ operation.sender.name }}</div>
+                                    <div class="operation_person_type title_style">{{ operation.sender.person_type }}</div>
+                                    <div class="operation_person_cardnumber title_style">{{ operation.sender.card_number }}</div>
+                                    <div class="operation_person_cardnumber title_style">{{ operation.sender.card_currency }}</div>
+                                </div>
+                            {% endif %}
+
+                        </div>
+                        <div class="operation_bottom_info title_style flex">
+                            <div class="operation_money flex">
+                                <div class="operation_amount">{{ operation.amount }}</div>
+                                <div class="operation_currency">{{ operation.currency }}</div>
+                            </div>
+                            <div class="operation_date">{{ operation.date }}</div>
+                        </div>
+                    </li>
+                {% empty %}
+                    <li class="link_item block_container_big flex">
+                        <div class="operation_header">Список пустий</div>
+                    </li>
+                {% endfor %}
+            </ul>  
+        </div>
+    </div>
+{% endblock %}

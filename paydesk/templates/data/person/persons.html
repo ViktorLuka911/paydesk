@@ -1,0 +1,96 @@
+{% extends "main/layout.html" %}
+{% load static %}
+
+{% block title %}
+    Список осіб
+{% endblock %}
+
+{% block page_styles %}
+    <link rel="stylesheet" href="{% static 'css/person/persons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/menu/burger_menu.css' %}">
+{% endblock %}
+
+{% block page_scripts %}
+    <script src="{% static 'js/burger_menu.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+
+    <div class="header_menu flex">
+        <div class="header_menu_container block_container_big flex">
+            <a href="{% url 'index' %}" class="back_button header_button flex hover_item block_container_big">
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
+
+            <a href="{% url 'persons' %}" class="header_button flex hover_item block_container_big">
+                <i class="fa-solid fa-rotate-right"></i>
+            </a>
+
+            <a href="{% url 'index' %}" class="header_button flex hover_item block_container_big">
+                <i class="fa-solid fa-house"></i>
+            </a>
+
+            <div class="dropdown">
+                <button class="dropdown_button hover_item header_button block_container_big " onclick="openTable('menu')">
+                    <i class="fa-solid fa-dollar-sign"></i>
+                </button>
+                <div id="menu" class="dropdown_content block_container_big title_style">
+                    <a href="#">USD до UAH: 37.04</a>
+                    <a href="#">EUR до UAH: 40.00</a>
+                    <a href="javascript:void(0)" onclick="closeTable('menu')" class="closebtn flex closebtn_menu">&times;</a>
+                </div>
+            </div>
+
+            <button class="openbtn flex hover_item header_button block_container_big" onclick="openNav('sidenavLeft')">
+                <li class="list_item title_style flex_block_row">
+                    <i class="fa-solid fa-magnifying-glass"></i>                
+                </li>
+            </button>
+
+            <a href="{% url 'add_person' %}" class="header_button flex hover_item block_container_big">
+                <i class="fa-solid fa-plus"></i>
+            </a>
+        </div>
+    </div>
+
+    
+
+    <div id="sidenavLeft" class="sidenav right">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav('sidenavLeft')">&times;</a>
+        <h1 class="header_style">Пошук особи</h1>
+        <form method="get" action="{% url 'persons' %}" class="search_form flex">
+            <div class="search_field field_sidebar_item text_style">{{ form.last_name }}</div>
+            <div class="search_field field_sidebar_item text_style">{{ form.first_name }}</div>
+            <button type="submit" class="sidebar_item title_style">
+                <i class="fa-solid fa-search"></i> Пошук
+            </button>
+        </form>
+    </div>
+
+    <div class="page_wide flex">
+        <div class="page_main_content flex">
+            <header class="header_main_list flex">
+                <div class="header_style block_container_big">
+                    <h1>Список осіб</h1>
+                </div>
+            </header>
+    
+            <div class="list flex">
+                <ul class="list_items flex">
+                    {% for person in persons %}
+                        <a href="{% url 'person' person_id=person.id %}" class="link_item">
+                            <li class="list_item hover_item block_container_big flex title_style">
+                                <div class="person_name">{{ person.first_name }} {{ person.last_name }}</div>
+                                <div class="person_number">{{ person.itn }}</div>
+                            </li>
+                        </a>
+                    {% empty %}
+                        <li class="link_item header_style block_container_big flex">
+                            <div class="operation_header">Список пустий</div>
+                        </li>
+                    {% endfor %}
+                </ul>    
+            </div>
+        </div>
+    </div>
+{% endblock %}

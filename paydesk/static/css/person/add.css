@@ -1,0 +1,74 @@
+body {
+    background-image: url('./../../img/img_1.jpg');
+}
+
+form {
+    margin: 20px;
+    width: 70%;
+}
+
+.form_block {
+    flex-direction: column;
+    gap: 30px;
+}
+
+.person_table {
+    margin-top: 30px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.titles, .titles_info {
+    flex-direction: column;
+}
+
+.titles {
+    width: 20%;
+    gap: 30px;
+    text-align: right;
+}
+
+.titles_info {
+    width: 60%;
+    gap: 10px;
+}
+
+textarea {
+    resize: none;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input[type="number"]::-webkit-inner-spin-button, 
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    appearance: none;
+}
+
+button {
+    width: 100%;
+}
+
+header {
+    gap: 20px;
+}
+
+header h1 {
+    width: 100%;
+}
+
+.titles_credit {
+    width: 30%;
+    gap: 30px;
+    text-align: right;
+    flex-direction: column;
+}
+
+.credit_block {
+    margin-top: 200px;
+}

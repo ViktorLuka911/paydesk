@@ -1,0 +1,69 @@
+{% extends "main/layout.html" %}
+{% load static %}
+
+{% block title %}
+    Додавання нової особи
+{% endblock %}
+
+{% block page_styles %}
+    <link rel="stylesheet" href="{% static 'css/person/add.css' %}">
+{% endblock %}
+
+{% block page_scripts %}
+    <script src="{% static 'js/burger_menu.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+
+    <div class="header_menu flex">
+        <div class="header_menu_container block_container_big flex">
+            <a href="{% url 'persons'  %}" class="header_button flex hover_item block_container_big">
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
+
+            <div class="dropdown">
+                <button class="dropdown_button hover_item header_button block_container_big " onclick="openTable('menu')">
+                    <i class="fa-solid fa-dollar-sign"></i>
+                </button>
+                <div id="menu" class="dropdown_content block_container_big title_style">
+                    <a href="#">USD до UAH: 37.04</a>
+                    <a href="#">EUR до UAH: 40.00</a>
+                    <a href="javascript:void(0)" onclick="closeTable('menu')" class="closebtn flex closebtn_menu">&times;</a>
+                </div>
+            </div>       
+
+            <a href="{% url 'index' %}" class="header_button flex hover_item block_container_big">
+                <i class="fa-solid fa-house"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="page_wide flex">
+        <form method="post">
+            {% csrf_token %}
+            <div class="form_block block_container_big flex">
+                <header class="flex">
+                    <h1 class="info header_style block_container_small">Створити особу</h1>
+                </header>
+                <div class="person_table flex">
+                    <div class="titles flex title_style">
+                        <strong>Прізвище</strong>
+                        <strong>Ім'я</strong>
+                        <strong>ІПН</strong>
+                        <strong>Вік</strong>
+                        <strong>Номер телефону</strong>
+                        <strong>{{form.error}}</strong>
+                    </div>
+                    <div class="titles_info flex title_style">
+                        <div class="block_container_small">{{ form.last_name }}</div>
+                        <div class="block_container_small">{{ form.first_name }}</div>
+                        <div class="block_container_small">{{ form.itn }}</div>
+                        <div class="block_container_small">{{ form.age }}</div>
+                        <div class="block_container_small">{{ form.phone_number }}</div>
+                    </div>                       
+                </div>
+        
+            <button type="submit" class="hover_item block_container_big title_style">Зберегти</button>
+        </form>
+    </div>
+{% endblock %}

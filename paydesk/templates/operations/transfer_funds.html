@@ -1,0 +1,78 @@
+{% extends "main/layout.html" %}
+{% load static %}
+
+{% block title %}
+    Переказ коштів
+{% endblock %}
+
+{% block page_styles %}
+    <link rel="stylesheet" href="{% static 'css/operations/operations.css' %}">
+{% endblock %}
+
+{% block page_scripts %}
+    <script src="{% static 'js/burger_menu.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+
+    <div class="header_menu flex">
+        <div class="header_menu_container block_container_big flex">
+            <div class="dropdown">
+                <button class="dropdown_button hover_item header_button block_container_big " onclick="openTable('menu')">
+                    <i class="fa-solid fa-dollar-sign"></i>
+                </button>
+                <div id="menu" class="dropdown_content block_container_big title_style">
+                    <a href="#">USD до UAH: 37.04</a>
+                    <a href="#">EUR до UAH: 40.00</a>
+                    <a href="javascript:void(0)" onclick="closeTable('menu')" class="closebtn flex closebtn_menu">&times;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page">
+        <header class="header_main_list_left flex">
+            <a href="{% url 'account' person_id=person.id account_id=account.id %}" class="back_button header_button flex hover_item block_container_big">
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
+            <div class="header_style block_container_big">
+                <h1>Переказ коштів</h1>
+            </div>
+        </header>
+
+        {% if message %}
+            <div class="block_container_big error_block title_style">
+                {{ message }}
+            </div>
+        {% endif %}
+
+        <div class="card_block block_container_big title_style">
+            <form method="post" class=" form_block flex">
+                {% csrf_token %}
+                    <div class="person_info">
+                        <div class="person_info_money flex title_style">
+                            <div class="money_amount flex">
+                                <strong>На балансі</strong>
+                                <div class="block_container_small">{{ account.amount_money }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input_table flex">
+                        <div class="titles flex">
+                            <strong>Введіть картку отримувача</strong>
+                            <strong>Введіть кількість грошей</strong>
+                        </div>
+                        <div class="titles_info flex title_style">
+                            <div class="block_container_small">{{ form.card_number }}</div>
+                            <div class="money_input flex">
+                                <div class="block_container_small">{{ form.amount }}</div>
+                                <div class="">{{ account.currency }}</div>
+                            </div>
+                        </div>
+                    </div>
+                <button type="submit" class="hover_item block_container_big title_style">Зберегти</button>
+            </form>
+        </div>   
+    </div>
+{% endblock %}

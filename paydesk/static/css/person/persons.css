@@ -1,0 +1,19 @@
+body {
+    background-image: url('./../../img/img_2.jpg');
+}
+
+.page_main_content {
+    align-items: center;
+    flex-direction: column;
+    width: 90%;
+}
+
+.person_name {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.person_number {
+    font-weight: 500;
+    color: rgb(30, 30, 30);
+}

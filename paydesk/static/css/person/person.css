@@ -1,0 +1,53 @@
+body {
+    background-image: url('./../../img/img_4.jpg');
+}
+
+.titles, .titles_info {
+    flex-direction: column;
+}
+
+.titles {
+    width: 40%;
+    gap: 30px;
+}
+
+.titles_info {
+    width: 50%;
+    gap: 10px;
+}
+
+.data_cardnumber {
+    width: 30%;
+}
+
+.table_info {
+    gap: 10px;
+    justify-content: center;
+}
+
+.data_cardtype {
+    width: 20%;
+    color: rgb(63, 63, 63);
+    text-align: right;
+}
+
+.data_amountmoney {
+    width: 35%;
+    text-align: right;
+}
+
+.data_currency {
+    width: 5%;
+}
+
+.data_amountmoney, .data_currency {
+    color: rgb(43, 43, 43);
+}
+
+.margin_top_block {
+    margin-top: 30px;
+}
+
+.link_item_full {
+    width: 100%;
+}

@@ -1,0 +1,43 @@
+{% extends "main/layout.html" %}
+{% load static %}
+
+{% block title %}
+    Головна сторінка
+{% endblock %}
+
+{% block page_styles %}
+    <link rel="stylesheet" href="{% static 'css/menu/main_menu.css' %}">
+{% endblock %}
+
+{% block page_scripts %}
+    <script src="{% static 'js/burger_menu.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+
+    <div class="header_menu flex">
+        <div class="header_menu_container block_container_big flex">
+            <div class="dropdown">
+                <button class="dropdown_button hover_item header_button block_container_big " onclick="openTable('menu')">
+                    <i class="fa-solid fa-dollar-sign"></i>
+                </button>
+                <div id="menu" class="dropdown_content block_container_big title_style">
+                    <a href="#">USD до UAH: 37.04</a>
+                    <a href="#">EUR до UAH: 40.00</a>
+                    <a href="javascript:void(0)" onclick="closeTable('menu')" class="closebtn flex closebtn_menu">&times;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page">
+        <header class="header_main block_container_big header_style">
+            <h1>Головна сторінка</h1>
+        </header>
+        <ul class="list_main flex">
+            <a href="{% url 'persons' %}" class="list_link hover_item flex block_container_big header_style">Особи</a>
+            <a href="{% url 'list_accounts' %}" class="list_link hover_item flex block_container_big header_style">Рахунки</a>
+            <a href="{% url 'list_operations' %}" class="list_link hover_item flex block_container_big header_style">Операції</a>
+        </ul>
+    </div>
+{% endblock %}

@@ -1,0 +1,25 @@
+body {
+    background-image: url('./../../img/img_3.jpg');
+}
+
+.header_main {
+    margin: 200px 0 100px 0;
+}
+
+.list_main {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.list_item {
+    gap: 10px; 
+}
+
+.list_link {
+    height: 200px;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 calc(45% - 10px);
+    box-sizing: border-box;
+}

@@ -1,0 +1,129 @@
+{% extends "main/layout.html" %}
+{% load static %}
+
+{% block title %}
+    Особа
+{% endblock %}
+
+{% block page_styles %}
+    <link rel="stylesheet" href="{% static 'css/person/person.css' %}">
+    <link rel="stylesheet" href="{% static 'css/menu/burger_menu.css' %}">
+{% endblock %}
+
+{% block page_scripts %}
+    <script src="{% static 'js/burger_menu.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+
+    <div class="header_menu flex">
+        <div class="header_menu_container block_container_big flex">
+            <a href="{% url 'persons' %}" class="header_button flex hover_item block_container_big">
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
+
+            <a href="{% url 'person' person_id=person.id %}" class="header_button flex hover_item block_container_big">
+                <i class="fa-solid fa-rotate-right"></i>
+            </a>
+
+            <a href="{% url 'index' %}" class="header_button flex hover_item block_container_big">
+                <i class="fa-solid fa-house"></i>
+            </a>
+
+            <div class="dropdown">
+                <button class="dropdown_button hover_item header_button block_container_big " onclick="openTable('menu')">
+                    <i class="fa-solid fa-dollar-sign"></i>
+                </button>
+                <div id="menu" class="dropdown_content block_container_big title_style">
+                    <a href="#">USD до UAH: 37.04</a>
+                    <a href="#">EUR до UAH: 40.00</a>
+                    <a href="javascript:void(0)" onclick="closeTable('menu')" class="closebtn flex closebtn_menu">&times;</a>
+                </div>
+            </div>
+
+            <button class="openbtn flex hover_item header_button block_container_big" onclick="openNav('sidenavLeft')">
+                <li class="list_item title_style flex_block_row">
+                    <i class="fa-solid fa-magnifying-glass"></i>                
+                </li>
+            </button>
+
+            <a href="{% url 'add_account' person.id %}" class="header_button flex hover_item block_container_big">
+                <i class="fa-solid fa-plus"></i>
+            </a>
+        </div>
+    </div>
+
+    <div id="sidenavLeft" class="sidenav right">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav('sidenavLeft')">&times;</a>
+        <h1 class="header_style">Пошук рахунку</h1>
+        <form method="get" action="{% url 'person' person_id=person.id %}" class="search_form flex">
+            <div class="search_field field_sidebar_item text_style">{{ form.card_number }}</div>
+            <button type="submit" class="sidebar_item title_style">
+                <i class="fa-solid fa-search"></i> Пошук
+            </button>
+        </form>
+    </div>
+
+    <div id="sidenavRight" class="sidenav left">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav('sidenavRight')">&times;</a>
+        <h1 class="header_style">Ви дійсно бажаєте видалити дані особи?</h1>
+        <a href="{% url 'delete_person' person.id %}" class="sidebar_item">Так</a>
+        <a href="javascript:void(0)" class="sidebar_item" onclick="closeNav('sidenavRight')">Ні</a>
+    </div>
+
+    <div class="page">
+        <header class="header_main_list flex">
+            <div class="header_style block_container_big">
+                <h1>Інформація про особу</h1>
+            </div>
+        </header>
+        
+        <div class="person_table block_container_big">
+                <h1 class="info header_style block_container_small">{{ person.last_name }} {{ person.first_name }}</h1>
+            <div class="table_info margin_top_block flex">
+                <div class="titles flex title_style">
+                    <strong>ІПН</strong>
+                    <strong>Вік</strong>
+                    <strong>Номер телефону</strong>
+                </div>
+                <div class="titles_info flex title_style">
+                    <div class="block_container_small">{{ person.itn }}</div>
+                    <div class="block_container_small">{{ person.age }}</div>
+                    <div class="block_container_small">{{ person.phone_number }}</div>
+                </div>    
+            </div>
+        </div>
+
+    <div class="work_user_data margin_top_block flex">
+        <button class="openbtn flex hover_item header_button block_container_big" onclick="openNav('sidenavRight')">
+            <p class="title_style">Видалити особу</p>
+        </button>  
+    </div>
+
+    <div class="list_accounts margin_top_block flex">
+        <h1 class="block_container_big header_style">Банківські рахунки</h1>
+        <ul class="list_items flex">
+            {% for account in accounts %}
+                <a href="{% url 'account' person_id=person.id account_id=account.id %}" class="link_item_full">
+                    <li class="list_item title_style hover_item block_container_big flex">
+                        <div class="data_cardnumber">{{ account.card_number }}</div>
+                        <div class="data_cardtype">{{ account.card_type }}</div>
+                            <div class="data_amountmoney">
+                                {% if data.card_type != 'Кредитна' %}
+                                    {{ account.amount_money|floatformat:2 }}
+                                {% endif %}
+                            </div>
+                        <div class="data_currency">{{ account.currency }}</div>
+                    </li>
+                </a>
+            {% empty %}
+                <li class="link_item header_style block_container_big flex">
+                    <div class="operation_header">Список пустий</div>
+                </li>
+            {% endfor %}
+        </ul>  
+    </div>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,34 @@
+body {
+    background-image: url('./../../img/img_2.jpg');
+}
+
+.back_button_small {
+    width: 80px;
+}
+
+.list_item_double {
+    width: 100%;
+    justify-content: space-between;
+}
+
+.person_part, .account_part {
+    width: 45%;
+    flex-direction: column;
+    gap: 10px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.data_money {
+    gap: 30px;
+}
+
+.data_type, .data_code, .data_cardtype, .data_amountmoney {
+    color: rgb(37, 37, 37);
+}
+
+.link_item_full {
+    width: 100%;
+}

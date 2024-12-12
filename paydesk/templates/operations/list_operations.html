@@ -1,0 +1,90 @@
+{% extends "main/layout.html" %}
+{% load static %}
+
+{% block title %}
+    Список операцій
+{% endblock %}
+
+{% block page_styles %}
+    <link rel="stylesheet" href="{% static 'css/operations/operations.css' %}">
+{% endblock %}
+
+{% block page_scripts %}
+    <script src="{% static 'js/burger_menu.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+
+    <div class="header_menu flex">
+        <div class="header_menu_container block_container_big flex">
+            <a href="{% url 'index' %}" class=" header_button flex hover_item block_container_big">
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
+            <div class="dropdown">
+                <button class="dropdown_button hover_item header_button block_container_big " onclick="openTable('menu')">
+                    <i class="fa-solid fa-dollar-sign"></i>
+                </button>
+                <div id="menu" class="dropdown_content block_container_big title_style">
+                    <a href="#">USD до UAH: 37.04</a>
+                    <a href="#">EUR до UAH: 40.00</a>
+                    <a href="javascript:void(0)" onclick="closeTable('menu')" class="closebtn flex closebtn_menu">&times;</a>
+                </div>
+            </div>
+            <a href="{% url 'index' %}" class="header_button flex hover_item block_container_big">
+                <i class="fa-solid fa-house"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="page">
+            <header class="header_main_list flex">
+                <div class="header_style block_container_big">
+                    <h1>Список операцій</h1>
+                </div>
+            </header>
+            <div class="list_wide flex">
+                <ul class="list_items flex">
+                    {% for operation in operations %}
+                        <li class="operation_item block_container_big flex">
+                                <div class="operation_header block_container_small">{{ operation.name }}</div>
+                                <div class="operation_persons flex half_width {% if not operation.sender %}full_width{% endif %} 
+                                {% if not operation.recipient %}full_width{% endif %}">
+                                    {% if operation.sender %}
+                                        <div class="operation_sender flex">
+                                            <div class="operation_person_title title_style block_container_small">Відправник</div>
+                                            <div class="operation_person title_style">{{ operation.sender.name }}</div>
+                                            <div class="operation_person_type title_style">{{ operation.sender.person_type }}</div>
+                                            <div class="operation_person_cardnumber title_style">{{ operation.sender.card_number }}</div>
+                                            <div class="operation_person_cardcurrency title_style">{{ operation.sender.card_currency }}</div>
+                                        </div>
+                                    {% endif %}
+
+                                    {% if operation.recipient %}
+                                        <div class="operation_recipient flex">
+                                            <div class="operation_person_title title_style block_container_small">Отримувач</div>
+                                            <div class="operation_person title_style">{{ operation.recipient.name }}</div>
+                                            <div class="operation_person_type title_style">{{ operation.recipient.person_type }}</div>
+                                            <div class="operation_person_cardnumber title_style">{{ operation.recipient.card_number }}</div>
+                                            <div class="operation_person_cardcurrency title_style">{{ operation.recipient.card_currency }}</div>
+                                        </div>
+                                    {% endif %}
+
+                                </div>
+                                <div class="operation_bottom_info title_style flex">
+                                    <div class="operation_money flex">
+                                        <div class="operation_amount">{{ operation.amount }}</div>
+                                        <div class="operation_currency">{{ operation.currency }}</div>
+                                    </div>
+                                    <div class="operation_date">{{ operation.date }}</div>
+                                </div>
+                        </li>
+                    {% empty %}
+                        <li class="link_item header_style block_container_big flex">
+                            <div class="operation_header">Список пустий</div>
+                        </li>
+                    {% endfor %}
+                </ul>    
+            </div>
+        </div>
+    </div>
+{% endblock %}
